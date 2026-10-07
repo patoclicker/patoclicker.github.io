@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pato Clicker · Descargar para Android</title>
+<meta name="description" content="Pato Clicker: construye tu valle de gansos, recoge huevos y haz crecer la bandada. Descarga gratis el APK para Android.">
+<meta property="og:title" content="Pato Clicker para Android">
+<meta property="og:description" content="Construye tu valle de gansos y haz crecer la bandada. Descarga gratis el APK.">
+<meta property="og:image" content="https://edsonvelasquez557-creator.github.io/pato-clicker/img/logo.png">
+<meta name="theme-color" content="#173025">
+<link rel="icon" type="image/png" href="img/icono.png">
+<link rel="apple-touch-icon" href="img/apple-touch.png">
+<style>
+  @font-face { font-family: "Picnic"; src: url("picnic.ttf") format("truetype"); font-display: swap; }
+  :root {
+    --bg: #173025; --bg-deep: #10231b; --panel: #213f31; --line: #3b5a47;
+    --cream: #eee3c8; --cream-light: #fff4d9; --ink: #293e32;
+    --gold: #d4b276; --gold-bright: #f1cf7e; --leaf: #8fbf6a; --muted: #b9c4b0;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--cream); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+  a { color: var(--gold-bright); }
+  .wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
+  h1, h2, h3, .btn { font-family: "Picnic", system-ui, sans-serif; letter-spacing: .02em; }
+
+  /* Hero */
+  .hero { position: relative; min-height: min(92vh, 760px); display: grid; align-items: end; isolation: isolate; }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: -2; background: url("img/portada.jpg") center 30% / cover; image-rendering: pixelated; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(16,35,27,.1) 0%, rgba(16,35,27,.25) 45%, var(--bg) 96%); }
+  .hero-inner { padding: 48px 0 40px; }
+  .logo { width: clamp(96px, 16vw, 132px); height: auto; margin-bottom: 16px; filter: drop-shadow(0 8px 0 rgba(16,35,27,.7)); }
+  .tag { display: inline-block; background: rgba(16,35,27,.82); border: 2px solid var(--gold); color: var(--gold-bright); padding: 4px 12px; font-size: 14px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  h1 { font-size: clamp(52px, 11vw, 112px); line-height: .95; margin: 14px 0 10px; color: var(--cream-light); text-shadow: 0 4px 0 var(--bg-deep), 0 0 30px rgba(0,0,0,.45); }
+  .lead { font-size: clamp(18px, 2.6vw, 22px); max-width: 560px; margin: 0 0 26px; text-shadow: 0 2px 8px rgba(0,0,0,.6); }
+  .actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-size: 24px; padding: 14px 26px; border: 4px solid var(--ink); background: var(--gold); color: #2a1b14; box-shadow: 0 6px 0 var(--bg-deep); transition: transform .12s, box-shadow .12s, background .12s; }
+  .btn:hover { background: var(--gold-bright); transform: translateY(-2px); box-shadow: 0 8px 0 var(--bg-deep); }
+  .btn:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--bg-deep); }
+  .btn svg { width: 26px; height: 26px; flex: none; }
+  .btn.secondary { background: var(--cream); font-size: 19px; padding: 11px 20px; }
+  .meta { margin-top: 14px; font-size: 14px; color: var(--muted); }
+  .meta b { color: var(--cream); font-weight: 600; }
+
+  section { padding: 64px 0; }
+  h2 { font-size: clamp(32px, 5vw, 46px); margin: 0 0 8px; color: var(--cream-light); }
+  .sub { color: var(--muted); margin: 0 0 28px; max-width: 640px; }
+
+  /* Gallery */
+  .gallery { display: grid; grid-auto-flow: column; grid-auto-columns: min(78%, 620px); gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 14px; scrollbar-color: var(--gold) var(--bg-deep); }
+  .gallery figure { margin: 0; scroll-snap-align: start; background: var(--panel); border: 3px solid var(--line); }
+  .gallery button { all: unset; cursor: zoom-in; display: block; }
+  .gallery img { aspect-ratio: 20 / 9; object-fit: cover; width: 100%; image-rendering: pixelated; }
+  .gallery figcaption { padding: 10px 14px; font-size: 15px; color: var(--muted); }
+
+  /* Features */
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .card { background: var(--cream); color: var(--ink); border: 3px solid var(--ink); padding: 20px; box-shadow: 0 5px 0 var(--bg-deep); }
+  .card h3 { margin: 0 0 6px; font-size: 24px; color: #3b432c; }
+  .card p { margin: 0; font-size: 16px; color: #4e5442; }
+  .card .ico { font-size: 30px; line-height: 1; margin-bottom: 10px; }
+
+  /* Install steps */
+  .install { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; align-items: start; }
+  ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 12px; }
+  ol.steps li { counter-increment: s; position: relative; background: var(--panel); border: 2px solid var(--line); padding: 14px 16px 14px 64px; }
+  ol.steps li::before { content: counter(s); position: absolute; left: 14px; top: 12px; width: 36px; height: 36px; display: grid; place-items: center; background: var(--gold); color: #2a1b14; border: 3px solid var(--ink); font: 20px "Picnic", sans-serif; }
+  ol.steps b { color: var(--cream-light); }
+  .qr-box { background: var(--cream); color: var(--ink); border: 3px solid var(--ink); padding: 20px; text-align: center; box-shadow: 0 5px 0 var(--bg-deep); }
+  .qr-box h3 { margin: 0 0 4px; font-size: 24px; }
+  .qr-box p { margin: 0 0 14px; font-size: 15px; color: #4e5442; }
+  #qr { display: inline-block; background: #fff; padding: 10px; border: 2px solid var(--ink); }
+  #qr img, #qr canvas { width: 180px; height: 180px; image-rendering: pixelated; }
+
+  /* FAQ */
+  details { background: var(--panel); border: 2px solid var(--line); margin-bottom: 10px; }
+  summary { cursor: pointer; padding: 14px 18px; font-weight: 700; color: var(--cream-light); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--gold); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "−"; }
+  details p { margin: 0; padding: 0 18px 16px; color: var(--muted); }
+
+  .cta { text-align: center; background: var(--bg-deep); border-top: 3px solid var(--line); }
+  .cta img { width: 112px; margin: 0 auto 14px; filter: drop-shadow(0 6px 0 rgba(0,0,0,.35)); }
+  footer { padding: 26px 0 40px; text-align: center; font-size: 14px; color: var(--muted); background: var(--bg-deep); }
+
+  /* Lightbox */
+  dialog { border: 0; padding: 0; background: transparent; max-width: 96vw; }
+  dialog::backdrop { background: rgba(8,18,13,.88); }
+  dialog img { max-height: 88vh; width: auto; border: 3px solid var(--gold); image-rendering: pixelated; }
+
+  .only-pc { display: none; }
+  body.pc .only-pc { display: block; }
+
+  @media (max-width: 760px) {
+    .install { grid-template-columns: 1fr; }
+    .btn { font-size: 21px; padding: 13px 20px; }
+    section { padding: 48px 0; }
+    .hero { min-height: 88vh; }
+    .hero::before { background-position: 50% 0; background-size: auto 62%; background-repeat: no-repeat; background-color: var(--bg); }
+    .hero::after { background: linear-gradient(180deg, rgba(16,35,27,0) 0%, rgba(16,35,27,.15) 30%, rgba(16,35,27,.92) 52%, var(--bg) 64%); }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <img class="logo" src="img/logo.png" alt="Logo de Pato Clicker" width="132" height="132">
+    <span class="tag">Gratis · Android</span>
+    <h1>Pato Clicker</h1>
+    <p class="lead">Toca a tu ganso, recoge huevos y convierte un prado vacío en un valle lleno de granjas, mercados y gansos que no paran de pasear.</p>
+    <div class="actions">
+      <a class="btn download" href="#" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>
+        Descargar APK
+      </a>
+      <a class="btn secondary" href="#instalar">¿Cómo se instala?</a>
+    </div>
+    <p class="meta">Versión <b data-version>1.0.0</b> · <b data-size>76 MB</b> · Android 7.0 o superior · Sin anuncios · Funciona sin Internet</p>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <h2>Así se ve</h2>
+      <p class="sub">Desliza para ver más. Toca una imagen para verla en grande.</p>
+    </div>
+    <div class="wrap gallery" id="gallery">
+      <figure><button data-full="img/valle.webp"><img src="img/valle.webp" alt="La plaza del pueblo con la fuente y los gansos paseando" loading="lazy"></button><figcaption>La plaza del pueblo, con su fuente y la bandada paseando.</figcaption></figure>
+      <figure><button data-full="img/evento.webp"><img src="img/evento.webp" alt="Evento del ganso dorado y el nido dorado" loading="lazy"></button><figcaption>El ganso dorado y el nido dorado: tus clics valen ×10.</figcaption></figure>
+      <figure><button data-full="img/construir.webp"><img src="img/construir.webp" alt="Menú para construir edificios" loading="lazy"></button><figcaption>Doce tipos de edificios, cada uno con tres niveles.</figcaption></figure>
+      <figure><button data-full="img/granja.webp"><img src="img/granja.webp" alt="Una granja con gansos granjeros" loading="lazy"></button><figcaption>Cada edificio trae a sus propios gansos trabajadores.</figcaption></figure>
+      <figure><button data-full="img/arbol.webp"><img src="img/arbol.webp" alt="Árbol de mejoras con plumas doradas" loading="lazy"></button><figcaption>Gana plumas doradas y mejora todas tus partidas.</figcaption></figure>
+      <figure><button data-full="img/casa.webp"><img src="img/casa.webp" alt="El interior de la casa del ganso" loading="lazy"></button><figcaption>Decora tu casa y cambia de aspecto en el armario.</figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Qué hay en el valle</h2>
+      <p class="sub">Un juego incremental tranquilo para jugar a ratos. Tus gansos siguen trabajando aunque cierres el juego.</p>
+      <div class="features">
+        <div class="card"><div class="ico">🥚</div><h3>Clic y bandada</h3><p>Toca a tu ganso para recoger huevos y compra hasta 50 gansos que multiplican cada clic.</p></div>
+        <div class="card"><div class="ico">🏡</div><h3>75 parcelas</h3><p>Comederos, estanques, granjas, mercados, fábricas, bancos… hasta el cohete en lo alto de la colina.</p></div>
+        <div class="card"><div class="ico">✨</div><h3>Eventos sorpresa</h3><p>Ganso dorado, lluvia de sacos, un ganso muy enfadado, la marea de gansos y hasta un OVNI.</p></div>
+        <div class="card"><div class="ico">🌙</div><h3>Día y noche</h3><p>Farolas que se encienden, luciérnagas, mariposas y un ciclo de día y noche de 12 minutos.</p></div>
+        <div class="card"><div class="ico">🎯</div><h3>Minijuegos</h3><p>Puntería, memoria y reflejos para ganar premios extra y batir tus récords.</p></div>
+        <div class="card"><div class="ico">🪶</div><h3>Plumas doradas</h3><p>Empieza de nuevo con ventaja: elige ramas del árbol de mejoras y crece más rápido.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="instalar">
+    <div class="wrap">
+      <h2>Cómo instalarlo</h2>
+      <p class="sub">El juego no está en Google Play, así que Android te pedirá permiso para instalarlo. Solo hay que hacerlo una vez.</p>
+      <div class="install">
+        <ol class="steps">
+          <li>Pulsa <b>Descargar APK</b> desde tu teléfono Android. Si el navegador avisa de que el archivo puede ser dañino, elige <b>Descargar de todas formas</b>.</li>
+          <li>Abre el archivo <b>pato-clicker.apk</b> desde la notificación de descarga o desde la carpeta <b>Descargas</b>.</li>
+          <li>Si aparece «Por tu seguridad, tu teléfono no puede instalar apps desconocidas», toca <b>Ajustes</b> y activa <b>Permitir desde esta fuente</b>.</li>
+          <li>Vuelve atrás, pulsa <b>Instalar</b> y luego <b>Abrir</b>. Si Play Protect pregunta, elige <b>Instalar de todas formas</b>.</li>
+          <li>Para actualizar, descarga la versión nueva e instálala encima: tu partida se conserva.</li>
+        </ol>
+        <div class="qr-box only-pc">
+          <h3>¿Estás en el ordenador?</h3>
+          <p>Escanea el código con la cámara de tu teléfono para abrir esta página allí.</p>
+          <div id="qr" aria-label="Código QR de esta página"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Preguntas</h2>
+      <details><summary>¿Es gratis?</summary><p>Sí. Sin anuncios y sin compras dentro del juego.</p></details>
+      <details><summary>¿Necesita Internet?</summary><p>No. Solo para descargarlo; después funciona sin conexión.</p></details>
+      <details><summary>¿Dónde se guarda mi partida?</summary><p>En tu teléfono, de forma automática. En Configuración → General puedes copiar tu partida como texto para guardarla o pasarla a otro teléfono.</p></details>
+      <details><summary>¿Funciona en iPhone?</summary><p>No, por ahora solo hay versión para Android.</p></details>
+      <details><summary>¿Cómo se juega?</summary><p>Mueve a tu ganso con el joystick de la izquierda y tócalo para recoger huevos. Toca una parcela o un edificio para construir y mejorar. Con los botones de abajo a la derecha abres el menú de construir, las mejoras, el diario, el mapa y la configuración.</p></details>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <img src="img/logo.png" alt="" width="112" height="112">
+      <h2>¿Listo para el valle?</h2>
+      <p class="sub" style="margin-inline:auto">Tu bandada te espera.</p>
+      <a class="btn download" href="#" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>
+        Descargar APK
+      </a>
+      <p class="meta">Versión <b data-version>1.0.0</b> · <b data-size>76 MB</b></p>
+    </div>
+  </section>
+</main>
+
+<footer>Pato Clicker · Juego para Android</footer>
+
+<dialog id="viewer"><img alt=""></dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  // Edit these when publishing a new version.
+  const APK = {
+    url: "https://github.com/edsonvelasquez557-creator/pato-clicker/releases/latest/download/pato-clicker.apk",
+    version: "1.0.0",
+    size: "76 MB"
+  };
+  document.querySelectorAll(".download").forEach(a => a.href = APK.url);
+  document.querySelectorAll("[data-version]").forEach(b => b.textContent = APK.version);
+  document.querySelectorAll("[data-size]").forEach(b => b.textContent = APK.size);
+
+  // On a computer, offer a QR code so the page opens on the phone.
+  const isPhone = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (!isPhone) {
+    document.body.classList.add("pc");
+    try { new QRCode(document.getElementById("qr"), { text: location.href.split("#")[0], width: 180, height: 180, correctLevel: QRCode.CorrectLevel.M }); }
+    catch (e) { document.querySelector(".qr-box").style.display = "none"; }
+  }
+
+  const viewer = document.getElementById("viewer");
+  document.querySelectorAll("#gallery button").forEach(b => b.addEventListener("click", () => {
+    viewer.querySelector("img").src = b.dataset.full;
+    viewer.querySelector("img").alt = b.querySelector("img").alt;
+    viewer.showModal();
+  }));
+  viewer.addEventListener("click", () => viewer.close());
+</script>
+</body>
+</html>
